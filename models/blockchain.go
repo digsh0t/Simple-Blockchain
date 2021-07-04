@@ -16,7 +16,7 @@ func AddData(blockchain []Block, data string) []Block {
 //Print Blockchain
 func PrintBlockChain(blockchain []Block) {
 	for pos, block := range blockchain {
-		fmt.Printf("========Block #%d=======\n", pos)
+		fmt.Printf("\n========Block #%d=======\n", pos)
 		fmt.Printf("<====Head: %x\n", block.Head)
 		fmt.Printf("Data: %s\n", block.Data)
 		fmt.Printf("====>Tail: %x\n", block.Tail)

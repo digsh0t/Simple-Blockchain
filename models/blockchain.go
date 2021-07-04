@@ -2,6 +2,7 @@ package models
 
 import "fmt"
 
+//Append Block to Blockchain
 func AddData(blockchain []Block, data string) []Block {
 	var newBlock Block
 	newBlock = newBlock.Mine(data)
@@ -12,6 +13,7 @@ func AddData(blockchain []Block, data string) []Block {
 	return blockchain
 }
 
+//Print Blockchain
 func PrintBlockChain(blockchain []Block) {
 	for pos, block := range blockchain {
 		fmt.Printf("========Block #%d=======\n", pos)

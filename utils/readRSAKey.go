@@ -1,0 +1,43 @@
+package utils
+
+import (
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/pem"
+)
+
+func ReadRSAKeyFromFile(pemFile string) rsa.PrivateKey {
+	pemString := `-----BEGIN PRIVATE KEY-----
+MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDwb6ey0mHtWB+N
+SEy0NG+Ib1ggbCJB+/DafhryEISOBK429HJN4EjA2NWDCEdis7L+kFsD+0YrqHLr
+2m8y2VyVy5AhIO7BQgK3U43D8g/nObAWmw/OQiUT2eTLA0Zh9wkKiioSV5WwEKK8
+sYokYnxzD+gbCmm+Zwsy2FmIG3tyK/pR3fiFhB8vW4wVkfz9b+/bS5i7SpSzX91W
+yqqQlnBXABRC2Vm+iyLVPNyaGQQR0EIvehGYy4vi3wJ1eE3C/g9nnoyafQ4ts406
+C7mu1Loos83fBdmoVSMzlv/TM1fun7yGACehmVME2vdwMcs4XNeWlaMQI/lIV/Bt
+PGqKAlkrAgMBAAECggEBAKmcmpizgRGF0PxBvJqDQwrkQS7eGWyi5k28GBYbQOdO
+tfdeiiQVzDz+ueAtvu4KBoM+Ina0k9PIiQmIllkwrPefGpXEPalnf7MD5kYMRNvA
+/k90I7pFPxK564SrUsNZGa+tt/AoiRgjJCootGLmdxRUbFBnECGZX3UG2mIBwRvQ
+PD5bDkuj/YXX42LxkSGFWkMZovVDHaiTYW5zhqlxiKn0sYXxcJFmhziOgDAwhcLm
+PG7H9iJJJlOb49oKLk6kc2M1iDJQaapfYXXGQIrxRJpn+OLFBwu3Gi8ENvnqiKMe
+fQjEUH+l8W/TqDiNFIpCBQrrYkyhOb6SHOZ2B0jZTgECgYEA+xRth9KhCeWN/HjW
+7+IE0SPAJ+KPxpkBhCspPw6WNkQ285uQyR9qExZ9w8n7q9uvuomVhfSTkQWxip7i
+7aHtSEdu3pldQmiNU/boEJp6kRAzjQ0gCNmZfSYieuwhuiGyuCZjyhvvb4LymhAu
+vj0IPZS1vHGt80KQ4wKz2wFt9ssCgYEA9SXVBBYlnOATxFsY8OqQ11mQ/SU+WtzV
+GdulBiuHi+rX3BCnGxUZv7P+ndkabqbYGxbfmeSh5NJEmEarTR7hMLDFWEm5zJir
+AkJun18eI4m/GCONE3jv+gIfp5k6cgCgd/8IcjtW9MvQOM49t8FlcFbszpv191EQ
+NsmgLyWGeyECgYEArjJtD6fd3LzsNrcsAIBicSuJnOJ+d/4d5DIByuL26q2HJprO
+6AsokBexp84SExk3IYdlOuwGGb7Gf/NeZBpNQzF0RXJIFtPtAc0zEpnq4YxJB9qM
+WDeIWyDDGV+MwtOwaD0STN32z/odETCbDZfQiNENCbIhSr3rQeTVHeQvA+MCgYEA
+nghtcdz1ElRBaetwAJ62EJ1kokxIDjseBTVbBMc68i/KR8tUblkD6FkYYpl6OKrF
+1XDBZGvHEcObBK9J7sVhVgoerfOZGxOv6hz5QzQGMdKypdUFNPBZg0mrLlfRHXzZ
+9YEq6LjoLZbV/Ei38KVzxx/COM7BmVVgpnEEGmCOeQECgYEA3Kq21Oupa4bQM1ot
+yt3WXbuOgiOVV81Vz5tBQHOgLNWisxBRaSzp8iZgybFByFEt1hyTVOStY674xfU7
+SZxd6ubM/gqThLAwfzucMz65KFQ1kYNSU8Rf1BvjQij2B3tdS0n3be8RU3s6NrwS
+2lFNfB7yzpArEMipyOQNjG2Qy/Y=
+-----END PRIVATE KEY-----`
+
+	block, _ := pem.Decode([]byte(pemString))
+	parseResult, _ := x509.ParsePKCS8PrivateKey(block.Bytes)
+	key := parseResult.(*rsa.PrivateKey)
+	return *key
+}

@@ -9,8 +9,9 @@ import (
 
 //Run demonstration
 func main() {
-	var trans models.Transaction
-	trans.MakeTransaction("Tri", "Long", 15)
-	sig := trans.SignRSASHA256(*utils.ReadRSAKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/alicepriv.pem"))
-	fmt.Println(trans.VerifyTransaction(*utils.ReadRSAPublicKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/alicepub.pem"), sig))
+	var blockchain models.Blockchain
+	blockchain.AddNewTransaction("Tri", "Long", 15, utils.ReadRSAKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/blockchain_private.pem"))
+	blockchain.AddNewTransaction("Long", "Ha", 12, utils.ReadRSAKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/blockchain_private.pem"))
+	fmt.Println(blockchain[0].VerifyBlock(*utils.ReadRSAPublicKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/blockchain_pk.pem")))
+	blockchain.PrintBlockChain()
 }

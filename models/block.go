@@ -58,6 +58,7 @@ func (newBlock *Block) Mine() {
 	}
 }
 
+//Verify if block match signature
 func (block *Block) VerifyBlock(publicKey rsa.PublicKey) string {
 	sig, _ := base64.StdEncoding.DecodeString(block.Signature)
 	message, err := json.Marshal(block.Data)

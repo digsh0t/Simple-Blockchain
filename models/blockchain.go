@@ -29,6 +29,7 @@ func (blockchain *Blockchain) PrintBlockChain() {
 	}
 }
 
+//Create a new transaction and put into blockchain
 func (blockchain *Blockchain) AddNewTransaction(sender string, receiver string, amount float32, privateKey *rsa.PrivateKey) {
 	var newBlock Block
 	newBlock.Data.InitTransaction(sender, receiver, amount)

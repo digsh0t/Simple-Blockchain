@@ -13,28 +13,28 @@ import (
 
 //Create Block Struct
 type Block struct {
-	Head      [32]byte
-	Tail      [32]byte
+	Previous  [32]byte
+	Hash      [32]byte
 	Data      Transaction
 	Nounce    int
 	Signature string
 }
 
 //Block Constructor
-func (block *Block) createBlock(tail [32]byte, data Transaction, nounce int) {
-	block.Tail = tail
+func (block *Block) createBlock(hash [32]byte, data Transaction, nounce int) {
+	block.Hash = hash
 	block.Nounce = nounce
 	block.Data = data
 }
 
-//Add Block Head when put into Blockchain
-func (block *Block) addHead(head [32]byte) {
-	(*block).Head = head
+//Add Block Previous when put into Blockchain
+func (block *Block) addPrevious(previous [32]byte) {
+	(*block).Previous = previous
 }
 
 //Check if Block is a Valid one
-func isValidBlock(tail [32]byte) bool {
-	if tail[0] == 0 && tail[1] == 0 {
+func isValidBlock(hash [32]byte) bool {
+	if hash[0] == 0 && hash[1] == 0 {
 		return true
 	} else {
 		return false

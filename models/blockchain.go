@@ -11,7 +11,7 @@ type Blockchain []Block
 func (blockchain *Blockchain) AddBlock(newBlock Block) {
 	newBlock.Mine()
 	if len(*blockchain) > 0 {
-		newBlock.addHead((*blockchain)[len(*blockchain)-1].Tail)
+		newBlock.addPrevious((*blockchain)[len(*blockchain)-1].Hash)
 	}
 	*blockchain = append((*blockchain), newBlock)
 }
@@ -20,12 +20,12 @@ func (blockchain *Blockchain) AddBlock(newBlock Block) {
 func (blockchain *Blockchain) PrintBlockChain() {
 	for pos, block := range *blockchain {
 		fmt.Printf("\n========Block #%d=======\n", pos)
-		fmt.Printf("<====Head: %x\n", block.Head)
+		fmt.Printf("<====Previous: %x\n", block.Previous)
 		fmt.Printf("Sender: %s\n", block.Data.Sender)
 		fmt.Printf("Receiver: %s\n", block.Data.Receiver)
 		fmt.Printf("Amount: %f\n", block.Data.Amount)
 		fmt.Printf("Signature: %s\n", block.Signature)
-		fmt.Printf("====>Tail: %x\n", block.Tail)
+		fmt.Printf("Hash: %x\n", block.Hash)
 	}
 }
 

@@ -11,6 +11,6 @@ import (
 func main() {
 	var trans models.Transaction
 	trans.MakeTransaction("Tri", "Long", 15)
-	sig := trans.SignRSASHA256(*utils.LoadRSAPrivatePemKey("/home/wintltr/Projects/test-rsa-signing/alicepriv.pem"))
-	fmt.Println(trans.VerifyTransaction(*utils.LoadPublicPemKey("/home/wintltr/Projects/test-rsa-signing/alicepub.pem"), sig))
+	sig := trans.SignRSASHA256(*utils.ReadRSAKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/alicepriv.pem"))
+	fmt.Println(trans.VerifyTransaction(*utils.ReadRSAPublicKeyFromFile("/home/wintltr/certificates/Blockchain-RSA-Keys/alicepub.pem"), sig))
 }

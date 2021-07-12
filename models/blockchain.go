@@ -3,6 +3,7 @@ package models
 import (
 	"crypto/rsa"
 	"fmt"
+	"time"
 )
 
 type Blockchain []Block
@@ -26,6 +27,7 @@ func (blockchain *Blockchain) PrintBlockChain() {
 		fmt.Printf("Amount: %f\n", block.Data.Amount)
 		fmt.Printf("Signature: %s\n", block.Signature)
 		fmt.Printf("Hash: %x\n", block.Hash)
+		fmt.Printf("Time: %s\n", block.Timestamp)
 	}
 }
 
@@ -34,5 +36,6 @@ func (blockchain *Blockchain) AddNewTransaction(sender string, receiver string, 
 	var newBlock Block
 	newBlock.Data.InitTransaction(sender, receiver, amount)
 	newBlock.Signature = newBlock.Data.SignRSASHA256(*privateKey)
+	newBlock.Timestamp = time.Now()
 	blockchain.AddBlock(newBlock)
 }

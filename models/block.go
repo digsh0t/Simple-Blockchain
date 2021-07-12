@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 )
 
 //Create Block Struct
@@ -17,6 +18,7 @@ type Block struct {
 	Hash      [32]byte
 	Data      Transaction
 	Nounce    int
+	Timestamp time.Time
 	Signature string
 }
 
